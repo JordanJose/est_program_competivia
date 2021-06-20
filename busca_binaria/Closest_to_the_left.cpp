@@ -11,14 +11,14 @@ int p(long long idx, long long x){
     return a[idx] <= x;
 }
 
-int busca_binaria(long long lo, long long hi, long long x){
+long long busca_binaria(long long lo, long long hi, long long x){
     long long md;
     while(lo < hi){
         md = lo + (hi-lo)/2;
-        if(p(md, x)) hi = md;
-        else lo = md + 1;
+        if(p(md, x)) lo = md + 1;
+        else hi = md;
     }
-    return lo; //indice do primeiro elemente em que o predicado é verdadeiro
+    return lo;
 }
 
 int main(){
@@ -33,16 +33,9 @@ int main(){
     // }
     for(int i = 0; i < k; i++){
         cin >> aux;
-        indc = busca_binaria(0, (n-1), aux);
+        indc = busca_binaria(0, n, aux);
         // cout << "Aux: " << aux << " Indc: " << indc << endl;
-        if(a[indc] > aux){
-            cout << 0 << endl;
-        } else{
-            while(a[indc] <= aux && indc < n){
-                indc++;
-            }
-            cout << indc << endl;
-        }
+        cout << indc << endl;
     }
     return 0;
 }
